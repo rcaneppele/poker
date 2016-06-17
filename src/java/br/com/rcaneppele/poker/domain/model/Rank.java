@@ -6,7 +6,12 @@ public enum Rank {
 	ROYAL_FLUSH("Royal Flush", 10) {
 		@Override
 		public boolean matches(Cards cards) {
-			return false;
+			return cards.isAllOfTheSameSuit() &&
+					cards.contains(CardValue.ACE) &&
+					cards.contains(CardValue.KING) &&
+					cards.contains(CardValue.QUEEN) &&
+					cards.contains(CardValue.JACK) &&
+					cards.contains(CardValue.TEN);
 		}
 	},
 	STRAIGHT_FLUSH("Straight Flush", 9) {

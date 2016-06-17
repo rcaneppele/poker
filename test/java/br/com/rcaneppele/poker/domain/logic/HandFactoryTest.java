@@ -26,18 +26,20 @@ public class HandFactoryTest {
 	
 	@Test
 	public void handShouldBeRankedAsRoyalFlush() {
-		Card ace = new Card(CardSuit.DIAMONDS, CardValue.ACE);
-		Card king = new Card(CardSuit.DIAMONDS, CardValue.KING);
-		Card queen = new Card(CardSuit.DIAMONDS, CardValue.QUEEN);
-		Card jack = new Card(CardSuit.DIAMONDS, CardValue.JACK);
-		Card ten = new Card(CardSuit.DIAMONDS, CardValue.TEN);
-		
-		Set<Card> set = new HashSet<>(Arrays.asList(ace, king, queen, jack, ten));
-		Cards cards = new Cards(set);
-
-		Hand royalFlush = factory.createHand(cards);
-		
-		Assert.assertEquals(Rank.ROYAL_FLUSH, royalFlush.getRank());
+		for (CardSuit suit : CardSuit.values()) {
+			Card ace = new Card(suit, CardValue.ACE);
+			Card king = new Card(suit, CardValue.KING);
+			Card queen = new Card(suit, CardValue.QUEEN);
+			Card jack = new Card(suit, CardValue.JACK);
+			Card ten = new Card(suit, CardValue.TEN);
+			
+			Set<Card> set = new HashSet<>(Arrays.asList(ace, king, queen, jack, ten));
+			Cards cards = new Cards(set);
+	
+			Hand royalFlush = factory.createHand(cards);
+			
+			Assert.assertEquals(Rank.ROYAL_FLUSH, royalFlush.getRank());
+		}
 	}
 	
 }
