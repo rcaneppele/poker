@@ -1,5 +1,8 @@
 package br.com.rcaneppele.poker.domain.logic;
 
+import java.util.Arrays;
+import java.util.List;
+
 import br.com.rcaneppele.poker.domain.model.Cards;
 import br.com.rcaneppele.poker.domain.model.Hand;
 import br.com.rcaneppele.poker.domain.model.Rank;
@@ -11,13 +14,9 @@ public class HandFactory {
 			throw new IllegalArgumentException("Cards must not be null");
 		}
 		
-		for (Rank rank : Rank.values()) {
-			if (rank.matches(cards)) {
-				return new Hand(cards, rank);
-			}
-		}
-		
-		throw new RuntimeException("Could not determine the hand of specified cards");
+		List<Rank> allRanks = Arrays.asList(Rank.values());
+		Rank matched = allRanks.stream().filter(r -> r.getChecker().matches(cards)).findFirst().get();
+		return new Hand(cards, matched);
 	}
 
 }

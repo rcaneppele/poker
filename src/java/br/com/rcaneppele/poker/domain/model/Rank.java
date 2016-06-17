@@ -1,71 +1,68 @@
 package br.com.rcaneppele.poker.domain.model;
 
+import br.com.rcaneppele.poker.domain.logic.rank.RankChecker;
+import br.com.rcaneppele.poker.domain.logic.rank.RoyalFlushChecker;
 
 public enum Rank {
 
 	ROYAL_FLUSH("Royal Flush", 10) {
 		@Override
-		public boolean matches(Cards cards) {
-			return cards.isAllOfTheSameSuit() &&
-					cards.contains(CardValue.ACE) &&
-					cards.contains(CardValue.KING) &&
-					cards.contains(CardValue.QUEEN) &&
-					cards.contains(CardValue.JACK) &&
-					cards.contains(CardValue.TEN);
+		public RankChecker getChecker() {
+			return new RoyalFlushChecker();
 		}
 	},
 	STRAIGHT_FLUSH("Straight Flush", 9) {
 		@Override
-		public boolean matches(Cards cards) {
-			return false;
+		public RankChecker getChecker() {
+			return null;
 		}
 	},
 	FOUR_OF_A_KIND("Four of a Kind", 8) {
 		@Override
-		public boolean matches(Cards cards) {
-			return false;
+		public RankChecker getChecker() {
+			return null;
 		}
 	},
 	FULL_HOUSE("Full House", 7) {
 		@Override
-		public boolean matches(Cards cards) {
-			return false;
+		public RankChecker getChecker() {
+			return null;
 		}
 	},
 	FLUSH("Flush", 6) {
 		@Override
-		public boolean matches(Cards cards) {
-			return false;
+		public RankChecker getChecker() {
+			return null;
 		}
 	},
 	STRAIGHT("Straight", 5) {
 		@Override
-		public boolean matches(Cards cards) {
-			return false;
+		public RankChecker getChecker() {
+			return null;
 		}
 	},
 	THREE_OF_A_KIND("Three of a Kind", 4) {
 		@Override
-		public boolean matches(Cards cards) {
-			return false;
+		public RankChecker getChecker() {
+			return null;
 		}
 	},
 	TWO_PAIRS("Tow Pairs", 3) {
 		@Override
-		public boolean matches(Cards cards) {
-			return false;
+		public RankChecker getChecker() {
+			return null;
 		}
 	},
 	ONE_PAIR("One Pair", 2) {
 		@Override
-		public boolean matches(Cards cards) {
-			return false;
+		public RankChecker getChecker() {
+			return null;
 		}
 	},
 	HIGH_CARD("High Card", 1) {
 		@Override
-		public boolean matches(Cards cards) {
-			return false;
+		public RankChecker getChecker() {
+			return null;
 		}
 	};
 	
@@ -77,7 +74,7 @@ public enum Rank {
 		this.strength = strength;
 	}
 	
-	public abstract boolean matches(Cards cards);
+	public abstract RankChecker getChecker();
 	
 	@Override
 	public String toString() {
