@@ -1,4 +1,4 @@
-package br.com.rcaneppele.poker.domain.logic;
+package br.com.rcaneppele.poker.domain.logic.rank;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,16 +12,14 @@ import br.com.rcaneppele.poker.domain.model.Card;
 import br.com.rcaneppele.poker.domain.model.CardSuit;
 import br.com.rcaneppele.poker.domain.model.CardValue;
 import br.com.rcaneppele.poker.domain.model.Cards;
-import br.com.rcaneppele.poker.domain.model.Hand;
-import br.com.rcaneppele.poker.domain.model.Rank;
 
-public class HandFactoryTest {
-
-	private HandFactory factory;
+public class RoyalFlushCheckerTest {
+	
+	private RankChecker checker;
 	
 	@Before
 	public void before() {
-		this.factory = new HandFactory();
+		this.checker = new RoyalFlushChecker();
 	}
 	
 	@Test
@@ -36,10 +34,10 @@ public class HandFactoryTest {
 			Set<Card> set = new HashSet<>(Arrays.asList(ace, king, queen, jack, ten));
 			Cards cards = new Cards(set);
 	
-			Hand royalFlush = factory.createHand(cards);
+			boolean matches = checker.matches(cards);
 			
-			Assert.assertEquals(Rank.ROYAL_FLUSH, royalFlush.getRank());
+			Assert.assertTrue(matches);
 		}
 	}
-	
+
 }
